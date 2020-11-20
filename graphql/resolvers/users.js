@@ -9,7 +9,7 @@ const {
   validateLoginInput,
 } = require("../../util/validators");
 
-const generateToken = (user) => {
+function generateToken(user) {
   return jwt.sign(
     {
       id: user.id,
@@ -19,7 +19,7 @@ const generateToken = (user) => {
     SECRET_KEY,
     { expiresIn: "1h" }
   );
-};
+}
 
 module.exports = {
   Mutation: {
