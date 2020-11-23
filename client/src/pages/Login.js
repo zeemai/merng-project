@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
+import { AuthContext } from "../context/auth";
 
 const useStyles = makeStyles(() => ({
   form: {
@@ -37,6 +38,7 @@ const useStyles = makeStyles(() => ({
 
 function Login(props) {
   const classes = useStyles();
+  const context = useContext(AuthContext);
 
   const [errors, setErrors] = useState("");
   const [values, setValues] = useState({
@@ -48,6 +50,7 @@ function Login(props) {
   };
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
     update(proxy, result) {
+      context.login(result.data.login);
       props.history.push("/");
     },
     onError(err) {

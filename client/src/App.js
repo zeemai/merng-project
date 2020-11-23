@@ -9,6 +9,9 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Navbar from "./components/Narbar";
 
+import { AuthProvider } from "./context/auth";
+import AuthRoute from "./util/AuthRoute";
+
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -31,20 +34,22 @@ const theme = createMuiTheme({
 
 function App() {
   return (
-    <MuiThemeProvider theme={theme}>
-      <div className="App">
-        <Router>
-          <Navbar />
-          <div className="container">
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/signup" component={Signup} />
-            </Switch>
-          </div>
-        </Router>
-      </div>
-    </MuiThemeProvider>
+    <AuthProvider>
+      <MuiThemeProvider theme={theme}>
+        <div className="App">
+          <Router>
+            <Navbar />
+            <div className="container">
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <AuthRoute exact path="/login" component={Login} />
+                <AuthRoute exact path="/signup" component={Signup} />
+              </Switch>
+            </div>
+          </Router>
+        </div>
+      </MuiThemeProvider>
+    </AuthProvider>
   );
 }
 

@@ -22,10 +22,6 @@ function Home() {
   const { loading, data } = useQuery(FETCH_POSTS_QUERY);
   dayjs.extend(relativeTime);
 
-  if (data) {
-    console.log(data);
-  }
-
   return (
     <div>
       {loading ? (
