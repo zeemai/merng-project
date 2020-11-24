@@ -6,6 +6,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import { FETCH_POSTS_QUERY } from "../util/graphql";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles(() => ({
   form: {
@@ -21,6 +22,8 @@ const useStyles = makeStyles(() => ({
   customError: {
     color: "red",
     fontSize: "0.8rem",
+    marginBottom: 20,
+    textAlign: "center",
   },
   progress: {
     position: "absolute",
@@ -47,6 +50,9 @@ function PostForm() {
       });
       values.body = "";
     },
+    onError(err) {
+      console.log(err);
+    },
     variables: values,
   });
   const handleSubmit = (event) => {
@@ -66,6 +72,11 @@ function PostForm() {
           onChange={handleChange}
           fullWidth
         />
+        {error && (
+          <Typography variant="body2" className={classes.customError}>
+            {error.graphQLErrors[0].message}
+          </Typography>
+        )}
         <Button
           variant="contained"
           type="submit"
