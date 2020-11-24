@@ -11,6 +11,7 @@ import { AuthContext } from "../context/auth";
 import PostForm from "../components/PostForm";
 import { FETCH_POSTS_QUERY } from "../util/graphql";
 import Grid from "@material-ui/core/Grid";
+import DeleteButton from "../components/DeleteButton";
 
 const useStyles = makeStyles(() => ({
   card: {
@@ -42,6 +43,9 @@ function Home() {
                   <Typography color="textSecondary" gutterBottom>
                     {post.username}
                   </Typography>
+                  {user && user.username === post.username && (
+                    <DeleteButton postId={post.id} />
+                  )}
                   <Typography variant="h5" component="h2">
                     {post.body}
                   </Typography>
