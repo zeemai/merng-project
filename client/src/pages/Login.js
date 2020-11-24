@@ -13,9 +13,6 @@ const useStyles = makeStyles(() => ({
   form: {
     textAlign: "center",
   },
-  image: {
-    fontSize: 48,
-  },
   pageTitle: {
     margin: "10px auto 20px auto",
     fontSize: 32,
